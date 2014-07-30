@@ -1,0 +1,130 @@
+@charset 'UTF-8';
+@media screen and (min-width:1000px){
+	:root{
+		font-size:1.3vw;
+	}
+}
+@media screen and (max-width:999px) and (min-width:500px){
+	:root{
+		font-size:2vw;
+	}
+}
+@media screen and (max-width:499px){
+	:root{
+		font-size:5vw;
+	}
+}
+:root {
+	--primary: #FF8200;
+	--light: #F7F7F7;
+	--dark: #3C3B37;
+	--gray: #454545;
+	--link-color: #00EED3;
+}
+* {
+	box-sizing: border-box;
+}
+html {
+	font-size: 18px;
+	color: var(--gray);
+	font-family: 'Comfortaa';
+}
+body {
+	margin: 0;
+	min-height: 100vh;
+	background-color: var(--light);
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+header {
+	color: white;
+	font-family: 'Comfortaa', Helvetica, sans-serif;
+	background-color: var(--primary);
+	text-align: center;
+	text-transform: capitalize;
+	padding: 0.1em 0;
+}
+img {
+	border: none;
+	max-width: 100%;
+	max-height: 100%;
+	width: auto;
+	height: auto;
+	vertical-align: bottom;
+}
+a {
+	color: var(--link-color);
+	text-decoration: none;
+}
+a[href^='mailto'] {
+	color: var(--light);
+}
+header a {
+	color: inherit;
+	text-decoration: none;
+}
+form {
+	border: 4px outset var(--primary);
+	width: 80%;
+	margin: 0 10%;
+	padding: 3em;
+	background-color: var(--light);
+	background-image: url('../images/gradients/light.gif');
+	background-image: linear-gradient(var(--light), lightgray);
+	background-position: top left;
+	background-repeat: repeat-x;
+	border-radius: 1em / 1em;
+	box-shadow: 0.3em 0.3em 0.3em var(--dark);
+}
+input {
+	border-width: 0 0 1px 0;
+	border-style: solid;
+	color: inherit;
+	border-color: var(--gray);
+	background-color: inherit;
+	background-color: transparent;
+}
+main {
+	padding: 2em 0;
+}
+footer {
+	color: var(--light);
+	background-color: var(--gray);
+	font-size: 1.3em;
+	padding: 0.4em;
+	border-top: 5px solid var(--primary);
+}
+footer svg {
+	height: 1em;
+	width: auto;
+	fill: currentColor;
+}
+footer svg * {
+	fill: inherit;
+}
+footer a svg{
+	transition: all 600ms;
+}
+footer a:hover > svg {
+	transform: translateX(0.5em)scale(1.2);
+	fill: var(--link-color);
+}
+@supports (display:flex) {
+	main {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
+	}
+	form{
+		flex: 1 1 80%;
+		margin: 0;
+	}
+}
+@font-face {
+    font-family: 'Comfortaa';
+	src: url('../fonts/Comfortaa.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
