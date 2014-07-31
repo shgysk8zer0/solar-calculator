@@ -1,5 +1,6 @@
 *.bak
 *.save
+*.sql
 *~
 *.log
 *out.css
