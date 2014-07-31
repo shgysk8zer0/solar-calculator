@@ -123,8 +123,38 @@ footer a:hover > svg {
 	}
 }
 @font-face {
-    font-family: 'Comfortaa';
+	font-family: 'Comfortaa';
 	src: url('../fonts/Comfortaa.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face{
+	font-family: 'Alice';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Alice'),local('Alice-Regular'),url('../fonts/Alice.woff')format('woff');
+}
+@font-face{
+	font-family:'Acme';
+	font-style:normal;
+	font-weight:400;
+	src: local('Acme'),local('Acme-Regular'),url('../fonts/acme.woff')format('woff');
+}
+@font-face{
+	font-family:'GNUTypewriter';
+	src:local('GNUTypewriter'),url('../fonts/gnome-typewriter.woff')format('woff');
+	font-weight:normal;
+	font-style:normal;
+}
+@font-face{
+	font-family:'PressStart';
+	font-weight:normal;
+	font-style:normal;
+	src: local('Press Start 2P'),url('../fonts/PressStart2P.woff')format('woff'),;
+}
+@font-face{
+	font-family:'Web Symbols';
+	font-style:normal;
+	font-weight:400;
+	src: url('../fonts/WebSymbols-Regular.woff')format('woff');
 }
