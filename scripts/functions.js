@@ -1,8 +1,8 @@
 if('oninput' in document) {
-	document.getElementById('in').oninput = calc;
+	document.forms.rateCalculator.in.oninput = calc;
 }
 else {
-	document.getElementById('in').onchange = calc;
+	document.forms.rateCalculator.in.onchange = calc;
 }
 document.forms.rateCalculator.onsubmit = function() {
 	return false;
