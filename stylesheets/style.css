@@ -1,7 +1,7 @@
 @charset 'UTF-8';
 @media screen and (min-width:1000px){
 	:root{
-		font-size:1.3max;
+		font-size:1.3vmax;
 	}
 }
 @media screen and (max-width:999px) and (min-width:480px){
@@ -25,6 +25,12 @@
 	--dark: #3C3B37;
 	--gray: #454545;
 	--link-color: #00EED3;
+	transform-style: preserve-3d;
+	perspective: 100vw;
+	backface-visibility: hidden;
+}
+* {
+	transform-style: inherit;
 }
 html {
 	font-size: 18px;
@@ -38,23 +44,18 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	overflow: hidden;
 }
-body > header {
-	color: white;
-	background-color: var(--primary);
-	text-align: center;
-	text-transform: capitalize;
-}
-header > h1 {
-	padding: 0.8em;
-}
+		
 img {
-	border: none;
 	max-width: 100%;
 	max-height: 100%;
 	width: auto;
 	height: auto;
 	vertical-align: bottom;
+}
+header img {
+	width: 100%;
 }
 a {
 	color: var(--link-color);
@@ -63,16 +64,39 @@ a {
 a[href^='mailto'] {
 	color: var(--light);
 }
+body > header {
+	padding-top: 1em;
+	background-color: var(--primary);
+	color: white;
+	text-align: center;
+	text-transform: capitalize;
+}
+header a:hover {
+	color: var(--link-color);
+}
+header h2 {
+	font-style: italic;
+}
+@media screen and (min-width: 800px) {
+	@supports(transform: rotateX(0)) {
+		header h2 {
+			transform-origin: top;
+			backface-visibility: hidden;
+			transition: transform 400ms, color 600ms;
+			transform: rotateX(90deg);
+		}
+		header hgroup:hover  h2  {
+			transform: none;
+			color: var(--link-color);
+		}
+	}
+}
 header a {
 	color: inherit;
 	text-decoration: none;
 	transition: color 600ms;
 }
-header a:hover {
-	color: var(--link-color);
-}
 form {
-	border: 4px outset var(--primary);
 	text-align: center;
 	width: 80%;
 	margin: 0 10%;
@@ -83,6 +107,7 @@ form {
 	background-image: linear-gradient(var(--light), lightgray);
 	background-position: top left;
 	background-repeat: repeat-x;
+	border: 4px outset var(--primary);
 	border-radius: 1em / 1em;
 	box-shadow: 0.3em 0.3em 0.3em var(--dark);
 }
@@ -104,7 +129,7 @@ footer {
 	padding: 0.4em;
 	border-top: 5px solid var(--primary);
 }
-footer svg {
+footer svg, footer img {
 	height: 1em;
 	width: auto;
 	fill: currentColor;
@@ -116,7 +141,7 @@ footer a svg{
 	transition: all 600ms;
 }
 footer a:hover > svg {
-	transform: translateX(0.5em)scale(1.2);
+	transform: translateX(0.5em)scale(1.2)skew(-15deg);
 	fill: var(--link-color);
 }
 @supports (display:flex) {
@@ -167,4 +192,17 @@ footer a:hover > svg {
 	font-style:normal;
 	font-weight:400;
 	src: url('../fonts/WebSymbols-Regular.woff')format('woff');
+}
+@keyframes foldDown {
+	from {
+		transform: rotateX(90deg);
+	}
+}
+@keyframes bgFade {
+	from {
+		background-color: currentColor;
+	}
+	to {
+		background-color: transparent;
+	}
 }
