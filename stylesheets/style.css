@@ -1,17 +1,22 @@
 @charset 'UTF-8';
 @media screen and (min-width:1000px){
 	:root{
-		font-size:1.3vw;
+		font-size:1.3max;
 	}
 }
-@media screen and (max-width:999px) and (min-width:500px){
+@media screen and (max-width:999px) and (min-width:480px){
 	:root{
-		font-size:2vw;
+		font-size:2vmax;
 	}
 }
-@media screen and (max-width:499px){
+@media screen and (max-width:500px) and (orientation: portrait){
 	:root{
 		font-size:5vw;
+	}
+}
+@media screen and (max-width:500px) and (orientation: landscape){
+	:root{
+		font-size:3vw;
 	}
 }
 :root {
