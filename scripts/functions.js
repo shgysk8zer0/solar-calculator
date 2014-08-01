@@ -1,3 +1,4 @@
+document.documentElement.className = '';
 if('oninput' in document) {
 	document.forms.rateCalculator.in.oninput = calc;
 }
