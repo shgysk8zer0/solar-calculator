@@ -24,7 +24,7 @@
 html {
 	font-size: 18px;
 	color: var(--gray);
-	font-family: 'Comfortaa';
+	font-family: 'Comfortaa', Helvetica, sans-serif;
 }
 body {
 	margin: 0;
@@ -34,13 +34,14 @@ body {
 	flex-direction: column;
 	justify-content: space-between;
 }
-header {
+body > header {
 	color: white;
-	font-family: 'Comfortaa', Helvetica, sans-serif;
 	background-color: var(--primary);
 	text-align: center;
 	text-transform: capitalize;
-	padding: 0.1em 0;
+}
+header > h1 {
+	padding: 0.8em;
 }
 img {
 	border: none;
@@ -60,12 +61,18 @@ a[href^='mailto'] {
 header a {
 	color: inherit;
 	text-decoration: none;
+	transition: color 600ms;
+}
+header a:hover {
+	color: var(--link-color);
 }
 form {
 	border: 4px outset var(--primary);
+	text-align: center;
 	width: 80%;
 	margin: 0 10%;
 	padding: 3em;
+	padding: 3vmin;
 	background-color: var(--light);
 	background-image: url('../images/gradients/light.gif');
 	background-image: linear-gradient(var(--light), lightgray);
@@ -110,12 +117,13 @@ footer a:hover > svg {
 @supports (display:flex) {
 	main {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
 	}
-	form{
-		flex: 1 1 80%;
+	form {
+		width: auto;
+		flex: 0 1 auto;
 		margin: 0;
 	}
 }
