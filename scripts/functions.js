@@ -12,25 +12,28 @@ function calc() {
 	var paid = parseFloat(document.forms.rateCalculator.in.value),
 		calculated = 0;
 	if(!isNaN(paid)) {
-		calculated = (paid * paid.getRate()).toFixed(2);
+		calculated = (paid * getRate(paid)).toFixed(2).toString();
 		document.getElementById('out').value = calculated;
 		document.getElementById('out').textContent = calculated;
 	}
 }
-Number.prototype.getRate = function() {
+function getRate(paid) {
 	var rate = 0.85;
-	if(this.between(0 , 20)) {
+	if(paid <= 20) {
 		rate = 0.75;
 	}
-	else if(this.between(20, 40)) {
+	else if(paid <= 40) {
 		rate = 0.72;
+	}
+	else if(paid <= 80) {
+		rate = 0.67;
+	}
+	else if(paid <= 100) {
+		rate = 0.65;
 	}
 	else {
 		rate = 0.63;
 	}
 	return rate;
-}
-Number.prototype.between = function(min, max) {
-	return (this >= min && this <= max);
 }
 calc();
