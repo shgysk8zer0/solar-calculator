@@ -1,3 +1,22 @@
+if(document.createElement('picture').toString() === '[object HTMLUnknownElement]') {
+	var pictures = document.getElementsByTagName('picture'), sources, image, i, n;
+	for(i = 0; i < pictures.length; i++) {
+		sources = pictures[i].getElementsByTagName('source');
+		image = pictures[i].getElementsByTagName('img')[0];
+		if('matchMedia' in window) {
+			for(n = 0; n < sources.length; n++) {
+				if(matchMedia(sources[n].getAttribute('media')).matches) {
+					console.log(sources[n]);
+					image.src = sources[n].getAttribute('srcset');
+					break;
+				}
+			}
+		}
+		else {
+			image.src = sources[0].getAttribute('src');
+		}
+	}
+}
 document.documentElement.className = '';
 if('oninput' in document) {
 	document.forms.rateCalculator.in.oninput = calc;
