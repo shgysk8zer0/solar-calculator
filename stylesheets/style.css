@@ -150,10 +150,17 @@ footer a:hover > svg {
 	transform: translateX(0.5em)scale(1.2)skew(-15deg);
 }
 address {
-	padding: 2em 0 0 2em;
-	-moz-columns: 2 400px;
-	-webkit-columns: 2 400px;
-	column-columns: 2 400px;
+	font-size: 80%;
+	padding: 2em 2em 0 2em;
+	-moz-columns: 2 300px;
+	-webkit-columns: 2 300px;
+	column-columns: 2 300px;
+	-moz-column-gap: 3em;
+	-webkit-column-gap: 3em;
+	column-gap: 3em;
+	-moz-column-rule: 0.2em solid var(--primary);
+	-webkit-column-rule: 2em solid var(--primary);
+	column-rule: 2em solid var(--primary);
 }
 @supports (display:flex) {
 	main {
