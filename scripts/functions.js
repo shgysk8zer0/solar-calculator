@@ -16,6 +16,13 @@ if(document.createElement('picture').toString() === '[object HTMLUnknownElement]
 		}
 	}
 }
+var tiers = [
+	document.forms.rateCalculator.tier1.value,
+	document.forms.rateCalculator.tier2.value,
+	document.forms.rateCalculator.tier3.value,
+	document.forms.rateCalculator.tier4.value,
+	document.forms.rateCalculator.tier5.value
+];
 document.documentElement.className = '';
 if('oninput' in document) {
 	document.forms.rateCalculator.in.oninput = calc;
