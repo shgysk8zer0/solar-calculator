@@ -12,9 +12,9 @@
 				</b>
 			</div><br />
 			<div>
-				<a href="tel:6618331977" target="_blank" title="Call the office" itemprop="telephone">Office: 661.833.1977 <?php include('images/telephone.svg')?></a><br />
-				<a href="tel:6614345324" target="_blank" title="Call my cell phone" itemprop="telephone">Cell: 661.434.5324 <?php include('images/mobile_icon.svg')?></a><br />
-				<a href="mailto:rtall@vivintsolar.com" target="_blank" title="Send me an email" itemprop="email">rtall@vivintsolar.com <?php include('images/envelope.svg')?></a><br /><br />
+				<a href="tel:6618331977" target="_blank" title="Call the office" itemprop="telephone">Office: 661.833.1977 <?php include('images/icons/telephone.svg')?></a><br />
+				<a href="tel:6614345324" target="_blank" title="Call my cell phone" itemprop="telephone">Cell: 661.434.5324 <?php include('images/icons/mobile_icon.svg')?></a><br />
+				<a href="mailto:rtall@vivintsolar.com" target="_blank" title="Send me an email" itemprop="email">rtall@vivintsolar.com <?php include('images/icons/envelope.svg')?></a><br /><br />
 			</div>
 		</div>
 		<div itemprop="workLocation" itemscope itemtype="http://schema.org/PostalAddress">
