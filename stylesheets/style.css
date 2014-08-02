@@ -77,12 +77,14 @@ header h2 {
 @media screen and (min-width: 800px) {
 	@supports(transform: rotateX(0)) {
 		header h2 {
+			opacity: 0;
 			transform-origin: top;
 			backface-visibility: hidden;
-			transition: transform 400ms, color 600ms;
+			transition: all 600ms;
 			transform: rotateX(90deg);
 		}
 		header h1:hover ~ h2, header h2:hover  {
+			opacity: 1;
 			transform: none;
 			color: var(--link-color);
 		}
