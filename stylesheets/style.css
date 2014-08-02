@@ -44,9 +44,9 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	overflow: hidden;
+	overflow-x: hidden;
 }
-		
+
 img {
 	max-width: 100%;
 	max-height: 100%;
@@ -60,9 +60,6 @@ header img {
 a {
 	color: var(--link-color);
 	text-decoration: none;
-}
-a[href^='mailto'] {
-	color: var(--light);
 }
 body > header {
 	padding-top: 1em;
@@ -85,7 +82,7 @@ header h2 {
 			transition: transform 400ms, color 600ms;
 			transform: rotateX(90deg);
 		}
-		header hgroup:hover  h2  {
+		header h1:hover ~ h2, header h2:hover  {
 			transform: none;
 			color: var(--link-color);
 		}
@@ -129,6 +126,13 @@ footer {
 	padding: 0.4em;
 	border-top: 5px solid var(--primary);
 }
+footer a {
+	color: var(--primary);
+	transition: color 600ms;
+}
+footer a:hover {
+	color: var(--link-color);
+}
 footer svg, footer img {
 	height: 1em;
 	width: auto;
@@ -142,7 +146,12 @@ footer a svg{
 }
 footer a:hover > svg {
 	transform: translateX(0.5em)scale(1.2)skew(-15deg);
-	fill: var(--link-color);
+}
+address {
+	padding: 2em 0 0 2em;
+	-moz-columns: 2 500px;
+	-webkit-columns: 2 500px;
+	column-columns: 2 500px;
 }
 @supports (display:flex) {
 	main {
