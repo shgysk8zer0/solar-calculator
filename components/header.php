@@ -6,10 +6,10 @@
 		<h2>Hello World!</h2>
 	</hgroup>
 	<picture>
-		<source media="(min-width: 1200px)" srcset="images/1600.jpg"/>
-		<source media="(min-width: 800px)" srcset="images/1200.jpg"/>
-		<source media="(min-width: 400px)" srcset="images/800.jpg"/>
-		<source media="(max-width: 400px)" srcset="images/400.jpg"/>
+		<source media="(min-width: 1400px)" srcset="images/1600.jpg"/>
+		<source media="(min-width: 1000px)" srcset="images/1200.jpg"/>
+		<source media="(min-width: 600px)" srcset="images/800.jpg"/>
+		<source media="(max-width: 599px)" srcset="images/400.jpg"/>
 		<img src="" alt="Solar Family"/>
 	</picture>
 </header>
