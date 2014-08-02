@@ -9,7 +9,7 @@
 	<meta name="robots" content="<?=$head->robots?>"/>
 	<meta name="viewport" content="<?=$head->viewport?>"/>
 	<base href="<?=URL?>/"/>
-	<link rel="favorite icon" type="image/x-icon" href="favicon.ico"/>
+	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 	<link rel="icon" type="image/svg" sizes="any" href="favicon.svgz?t=<?=time()?>"/>
 <link rel="alternate icon" type="image/png" sizes="16x16" href="favicon.png"/>
 	<?php if(localhost() and BROWSER === 'Firefox'):?>
