@@ -2,6 +2,8 @@
 	$tiers = $DB->fetch_array("
 		SELECT `tier`, `rate`
 		FROM `tiers`
+		ORDER BY `tier`
+		LIMIT 5
 	");
 ?>
 <main>
