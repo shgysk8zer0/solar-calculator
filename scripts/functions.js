@@ -6,7 +6,6 @@ if(document.createElement('picture').toString() === '[object HTMLUnknownElement]
 		if('matchMedia' in window) {
 			for(n = 0; n < sources.length; n++) {
 				if(matchMedia(sources[n].getAttribute('media')).matches) {
-					console.log(sources[n]);
 					image.src = sources[n].getAttribute('srcset');
 					break;
 				}
