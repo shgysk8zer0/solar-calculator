@@ -1,3 +1,4 @@
+'use strict';
 if(document.createElement('picture').toString() === '[object HTMLUnknownElement]') {
 	var pictures = document.getElementsByTagName('picture'), sources, image, i, n;
 	for(i = 0; i < pictures.length; i++) {
@@ -16,21 +17,22 @@ if(document.createElement('picture').toString() === '[object HTMLUnknownElement]
 		}
 	}
 }
-var tiersRates = [
+
+var tierRates = [
 		parseFloat(parseFloat(document.forms.rateCalculator.tier1.value).toFixed(2)),
 		parseFloat(parseFloat(document.forms.rateCalculator.tier2.value).toFixed(2)),
 		parseFloat(parseFloat(document.forms.rateCalculator.tier3.value).toFixed(2)),
-		parseFloat(parseFloat(document.forms.rateCalculator.tier4.value).toFixed(2)),
-		parseFloat(parseFloat(document.forms.rateCalculator.tier5.value).toFixed(2))
+		parseFloat(parseFloat(document.forms.rateCalculator.tier4.value).toFixed(2))
 	],
 	tierKw = [
 		parseInt(document.forms.rateCalculator.tier1_kw.value),
 		parseInt(document.forms.rateCalculator.tier2_kw.value),
 		parseInt(document.forms.rateCalculator.tier3_kw.value),
-		parseInt(document.forms.rateCalculator.tier4_kw.value),
-		parseInt(document.forms.rateCalculator.tier5_kw.value)
+		parseInt(document.forms.rateCalculator.tier4_kw.value)
 	],
-	solarRate = 0.15;
+	tierStartCost = getTierStart(),
+	solarRate = parseFloat(document.forms.rateCalculator.solarRate.value);
+
 document.documentElement.className = '';
 if('oninput' in document) {
 	document.forms.rateCalculator.in.oninput = calc;
@@ -41,32 +43,44 @@ else {
 document.forms.rateCalculator.onsubmit = function() {
 	return false;
 }
+
 function calc() {
-	var paid = parseFloat(document.forms.rateCalculator.in.value),
+	var paid = parseFloat(parseFloat(document.forms.rateCalculator.in.value).toFixed(2)),
 		calculated = 0;
+
 	if(!isNaN(paid)) {
-		calculated = (paid * getRate(paid)).toFixed(2).toString();
+		calculated = (getKilowatts(paid) * solarRate).toFixed(2);
 		document.getElementById('out').value = calculated;
 		document.getElementById('out').textContent = calculated;
 	}
 }
-function getRate(paid) {
-	var rate = 0.85;
-	if(paid <= 20) {
-		rate = 0.75;
+
+function getTierStart() {
+	var starts = [0];
+	for(var i = 1; i < tierRates.length; i++) {
+		starts.push(starts[i - 1] + (tierRates[i - 1] * (tierKw[i] - tierKw[i - 1])));
 	}
-	else if(paid <= 40) {
-		rate = 0.72;
+	return starts;
+}
+
+function getKilowatts(paid) {
+	var tier  = getTier(paid);
+	return tierKw[tier] + ((paid - tierStartCost[tier]) / tierRates[tier]);
+}
+
+function getTier(paid) {
+	if(paid <= tierStartCost[1]) {
+		return 0;
 	}
-	else if(paid <= 80) {
-		rate = 0.67;
+	else if(paid <= tierStartCost[2]) {
+		return 1;
 	}
-	else if(paid <= 100) {
-		rate = 0.65;
+	else if(paid <= tierStartCost[3]) {
+		return 2;
 	}
 	else {
-		rate = 0.63;
+		return 3;
 	}
-	return rate;
 }
+
 calc();
