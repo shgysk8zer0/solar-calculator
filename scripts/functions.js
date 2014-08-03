@@ -16,13 +16,21 @@ if(document.createElement('picture').toString() === '[object HTMLUnknownElement]
 		}
 	}
 }
-var tiers = [
-	document.forms.rateCalculator.tier1.value,
-	document.forms.rateCalculator.tier2.value,
-	document.forms.rateCalculator.tier3.value,
-	document.forms.rateCalculator.tier4.value,
-	document.forms.rateCalculator.tier5.value
-];
+var tiersRates = [
+		parseFloat(parseFloat(document.forms.rateCalculator.tier1.value).toFixed(2)),
+		parseFloat(parseFloat(document.forms.rateCalculator.tier2.value).toFixed(2)),
+		parseFloat(parseFloat(document.forms.rateCalculator.tier3.value).toFixed(2)),
+		parseFloat(parseFloat(document.forms.rateCalculator.tier4.value).toFixed(2)),
+		parseFloat(parseFloat(document.forms.rateCalculator.tier5.value).toFixed(2))
+	],
+	tierKw = [
+		parseInt(document.forms.rateCalculator.tier1_kw.value),
+		parseInt(document.forms.rateCalculator.tier2_kw.value),
+		parseInt(document.forms.rateCalculator.tier3_kw.value),
+		parseInt(document.forms.rateCalculator.tier4_kw.value),
+		parseInt(document.forms.rateCalculator.tier5_kw.value)
+	],
+	solarRate = 0.15;
 document.documentElement.className = '';
 if('oninput' in document) {
 	document.forms.rateCalculator.in.oninput = calc;
