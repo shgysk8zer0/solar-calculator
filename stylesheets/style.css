@@ -155,13 +155,13 @@ address {
 	padding: 2em 2em 0 2em;
 	-moz-columns: 2 300px;
 	-webkit-columns: 2 300px;
-	column-columns: 2 300px;
+	columns: 2 300px;
 	-moz-column-gap: 3em;
 	-webkit-column-gap: 3em;
 	column-gap: 3em;
 	-moz-column-rule: 0.2em solid var(--primary);
-	-webkit-column-rule: 2em solid var(--primary);
-	column-rule: 2em solid var(--primary);
+	-webkit-column-rule: 0.2em solid var(--primary);
+	column-rule: 0.2em solid var(--primary);
 }
 @supports (display:flex) {
 	main {
