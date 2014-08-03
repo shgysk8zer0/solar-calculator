@@ -3,7 +3,7 @@
 		SELECT `tier`, `rate`, `kw`
 		FROM `tiers`
 		ORDER BY `tier`
-		LIMIT 5
+		LIMIT 4
 	");
 ?>
 <form name="<?=filename(__FILE__)?>">
@@ -14,6 +14,7 @@
 		<b>*</b>
 		<em>Rates are estimated.</em>
 	</small>
+	<input type="hidden" name="solarRate" value="0.15"/>
 	<?php foreach($tiers as $tier):?>
 	<input type="hidden" name="tier<?=$tier->tier?>" value="<?=$tier->rate?>"/>
 	<input type="hidden" name="tier<?=$tier->tier?>_kw" value="<?=$tier->kw?>"/>
