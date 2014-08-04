@@ -7,6 +7,7 @@
 	<meta name="description" content="<?=$head->description?>"/>
 	<meta name="keywords" content="<?=$head->keywords?>"/>
 	<meta name="robots" content="<?=$head->robots?>"/>
+	<meta name="author" content="<?=$head->author?>"/>
 	<meta name="viewport" content="<?=$head->viewport?>"/>
 	<base href="<?=URL?>/"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
