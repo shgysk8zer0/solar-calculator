@@ -1,6 +1,6 @@
 <header role="banner">
 	<h1>
-		<a href="http://www.vivintsolar.com/en/">vivint solar</a>
+		<a href="http://www.vivintsolar.com/en/">vivint.solar</a>
 	</h1>
 	<h2>Hello World!</h2>
 	<picture>
