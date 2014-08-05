@@ -1,5 +1,5 @@
 'use strict';
-if(document.createElement('picture').toString() === '[object HTMLUnknownElement]') {
+if(document.createElement('picture').toString() === document.createElement('foobar').toString()) {
 	var pictures = document.getElementsByTagName('picture'), sources, image, i, n;
 	for(i = 0; i < pictures.length; i++) {
 		sources = pictures[i].getElementsByTagName('source');
@@ -51,7 +51,7 @@ function calc() {
 	if(!isNaN(paid)) {
 		calculated = (getKilowatts(paid) * solarRate).toFixed(2);
 		document.getElementById('out').value = calculated;
-		document.getElementById('out').textContent = calculated;
+		document.getElementById('out').innerHTML = calculated;
 	}
 }
 
