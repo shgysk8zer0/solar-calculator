@@ -68,9 +68,6 @@ body > header {
 	text-align: center;
 	text-transform: capitalize;
 }
-header a:hover {
-	color: var(--link-color);
-}
 header h2 {
 	font-style: italic;
 }
@@ -86,7 +83,6 @@ header h2 {
 		header h1:hover ~ h2, header h2:hover  {
 			opacity: 1;
 			transform: none;
-			color: var(--link-color);
 		}
 	}
 }
