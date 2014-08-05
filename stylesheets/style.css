@@ -101,7 +101,7 @@ form {
 	margin: 0 10%;
 	padding: 3em;
 	padding: 3vmin;
-	background-color: var(--light);
+	background-color: lightgray;
 	background-image: url('../images/gradients/light.gif');
 	background-image: linear-gradient(var(--light), lightgray);
 	background-position: top left;
