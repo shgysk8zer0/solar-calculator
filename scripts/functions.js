@@ -13,7 +13,12 @@ if(document.createElement('picture').toString() === document.createElement('foob
 			}
 		}
 		else {
-			image.src = sources[sources.length - 1].getAttribute('srcset');
+			for(n = 0; n < sources.length; n++) {
+				if(sources[n].getAttribute('media') === 'all') {
+					image.src = sources[n].getAttribute('srcset');
+					break;
+				}
+			}
 		}
 	}
 }
