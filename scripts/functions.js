@@ -19,33 +19,33 @@ if(document.createElement('picture').toString() === '[object HTMLUnknownElement]
 }
 
 var tierRates = [
-		parseFloat(parseFloat(document.forms.rateCalculator.tier1.value).toFixed(2)),
-		parseFloat(parseFloat(document.forms.rateCalculator.tier2.value).toFixed(2)),
-		parseFloat(parseFloat(document.forms.rateCalculator.tier3.value).toFixed(2)),
-		parseFloat(parseFloat(document.forms.rateCalculator.tier4.value).toFixed(2))
+		parseFloat(parseFloat(document.getElementById('tier1').value).toFixed(2)),
+		parseFloat(parseFloat(document.getElementById('tier2').value).toFixed(2)),
+		parseFloat(parseFloat(document.getElementById('tier3').value).toFixed(2)),
+		parseFloat(parseFloat(document.getElementById('tier4').value).toFixed(2))
 	],
 	tierKw = [
-		parseInt(document.forms.rateCalculator.tier1_kw.value),
-		parseInt(document.forms.rateCalculator.tier2_kw.value),
-		parseInt(document.forms.rateCalculator.tier3_kw.value),
-		parseInt(document.forms.rateCalculator.tier4_kw.value)
+		parseInt(document.getElementById('tier1_kw').value),
+		parseInt(document.getElementById('tier2_kw').value),
+		parseInt(document.getElementById('tier3_kw').value),
+		parseInt(document.getElementById('tier4_kw').value)
 	],
 	tierStartCost = getTierStart(),
 	solarRate = parseFloat(document.forms.rateCalculator.solarRate.value);
 
 document.documentElement.className = '';
 if('oninput' in document) {
-	document.forms.rateCalculator.in.oninput = calc;
+	document.getElementById('in').oninput = calc;
 }
 else {
-	document.forms.rateCalculator.in.onchange = calc;
+	document.getElementById('in').onchange = calc;
 }
 document.forms.rateCalculator.onsubmit = function() {
 	return false;
 }
 
 function calc() {
-	var paid = parseFloat(parseFloat(document.forms.rateCalculator.in.value).toFixed(2)),
+	var paid = parseFloat(parseFloat(document.getElementById('in').value).toFixed(2)),
 		calculated = 0;
 
 	if(!isNaN(paid)) {

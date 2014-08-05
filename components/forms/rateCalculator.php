@@ -16,7 +16,7 @@
 	</small>
 	<input type="hidden" name="solarRate" value="0.15"/>
 	<?php foreach($tiers as $tier):?>
-	<input type="hidden" name="tier<?=$tier->tier?>" value="<?=$tier->rate?>"/>
-	<input type="hidden" name="tier<?=$tier->tier?>_kw" value="<?=$tier->kw?>"/>
+	<input type="hidden" name="tier<?=$tier->tier?>" id="tier<?=$tier->tier?>" value="<?=$tier->rate?>"/>
+	<input type="hidden" name="tier<?=$tier->tier?>_kw" id="tier<?=$tier->tier?>_kw" value="<?=$tier->kw?>"/>
 	<?php endforeach?>
 </form>
