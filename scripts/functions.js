@@ -13,7 +13,7 @@ if(document.createElement('picture').toString() === document.createElement('foob
 			}
 		}
 		else {
-			image.src = sources[0].getAttribute('srcset');
+			image.src = sources[sources.length - 1].getAttribute('srcset');
 		}
 	}
 }
