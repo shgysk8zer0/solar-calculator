@@ -19,10 +19,10 @@
 	<?php else:?>
 	<link rel="stylesheet" type="text/css" href="stylesheets/combined.out.css" media="all"/>
 	<?php endif?>
-	<script type="application/javascript" src="scripts/functions.js" async defer></script>
+	<script type="text/javascript" src="scripts/functions.js" async defer></script>
 	<!--[if lte IE 8]>
 		<script type="text/javascript">
-			var html5=new Array('header','hgroup','nav','menu','main','section','article','footer','aside','mark');
+			var html5=new Array('header','hgroup','nav','menu','main','section','article','footer','aside','mark', 'picture', 'output');
 			for(var i=0;i<html5.length;i++){document.createElement(html5[i]);}
 		</script>
 	<![endif]-->
