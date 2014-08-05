@@ -40,23 +40,23 @@ var tierRates = [
 
 document.documentElement.className = '';
 if('oninput' in document) {
-	document.getElementById('in').oninput = calc;
+	document.getElementById('paidRate').oninput = calc;
 }
 else {
-	document.getElementById('in').onchange = calc;
+	document.getElementById('paidRate').onchange = calc;
 }
 document.forms.rateCalculator.onsubmit = function() {
 	return false;
 }
 
 function calc() {
-	var paid = parseFloat(parseFloat(document.getElementById('in').value).toFixed(2)),
+	var paid = parseFloat(parseFloat(document.getElementById('paidRate').value).toFixed(2)),
 		calculated = 0;
 
 	if(!isNaN(paid)) {
 		calculated = (getKilowatts(paid) * solarRate).toFixed(2);
-		document.getElementById('out').value = calculated;
-		document.getElementById('out').innerHTML = calculated;
+		document.getElementById('calculated').value = calculated;
+		document.getElementById('calculated').innerHTML = calculated;
 	}
 }
 
