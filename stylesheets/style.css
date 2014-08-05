@@ -99,7 +99,7 @@ form {
 	text-align: center;
 	width: 80%;
 	margin: 0 10% 0 10%;
-	padding: 3em;
+	padding: 0;
 	padding: 3vmin;
 	background-color: lightgray;
 	background-image: url('../images/gradients/light.gif');
