@@ -55,8 +55,6 @@ Copy your "clone URL"
 ### Required Apache Modules:
 * [mod_headers](<http://httpd.apache.org/docs/2.2/mod/mod_headers.html>)
 * [mod_mime](<http://httpd.apache.org/docs/2.2/mod/mod_mime.html>)
-* [mod_include](<http://httpd.apache.org/docs/2.2/mod/mod_include.html>)
-* [mod_rewrite](<http://httpd.apache.org/docs/2.2/mod/mod_rewrite.html>)
 
 ### Recommended for CSS editing
 
