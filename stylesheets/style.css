@@ -1,17 +1,22 @@
 @charset 'UTF-8';
 @media screen and (min-width:1000px){
 	:root{
-		font-size:1.3vw;
+		font-size:1.3vmax;
 	}
 }
-@media screen and (max-width:999px) and (min-width:500px){
+@media screen and (max-width:999px) and (min-width:480px){
 	:root{
-		font-size:2vw;
+		font-size:2vmax;
 	}
 }
-@media screen and (max-width:499px){
+@media screen and (max-width:500px) and (orientation: portrait){
 	:root{
 		font-size:5vw;
+	}
+}
+@media screen and (max-width:500px) and (orientation: landscape){
+	:root{
+		font-size:3vw;
 	}
 }
 :root {
@@ -20,14 +25,17 @@
 	--dark: #3C3B37;
 	--gray: #454545;
 	--link-color: #00EED3;
+	transform-style: preserve-3d;
+	perspective: 100vw;
+	backface-visibility: hidden;
 }
 * {
-	box-sizing: border-box;
+	transform-style: inherit;
 }
 html {
 	font-size: 18px;
 	color: var(--gray);
-	font-family: 'Comfortaa';
+	font-family: 'Comfortaa', Helvetica, sans-serif;
 }
 body {
 	margin: 0;
@@ -36,48 +44,71 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+	overflow-x: hidden;
 }
-header {
-	color: white;
-	font-family: 'Comfortaa', Helvetica, sans-serif;
-	background-color: var(--primary);
-	text-align: center;
-	text-transform: capitalize;
-	padding: 0.1em 0;
-}
+
 img {
-	border: none;
 	max-width: 100%;
 	max-height: 100%;
 	width: auto;
 	height: auto;
 	vertical-align: bottom;
 }
+header img {
+	width: 100%;
+}
 a {
 	color: var(--link-color);
 	text-decoration: none;
 }
-a[href^='mailto'] {
-	color: var(--light);
+body > header {
+	padding-top: 1em;
+	background-color: var(--primary);
+	color: white;
+	text-align: center;
+	text-transform: capitalize;
+}
+header h2 {
+	font-style: italic;
+}
+@media screen and (min-width: 800px) {
+	@supports(transform: rotateX(0)) {
+		header h2 {
+			opacity: 0;
+			transform-origin: top;
+			backface-visibility: hidden;
+			transition: all 600ms;
+			transform: rotateX(90deg);
+		}
+		header h1:hover ~ h2, header h2:hover  {
+			opacity: 1;
+			transform: none;
+		}
+	}
 }
 header a {
 	color: inherit;
 	text-decoration: none;
+	transition: color 600ms;
 }
 form {
-	border: 4px outset var(--primary);
+	text-align: center;
 	width: 80%;
-	margin: 0 10%;
-	padding: 3em;
-	background-color: var(--light);
+	margin: 0 10% 0 10%;
+	padding: 0;
+	padding: 3vmin;
+	background-color: lightgray;
 	background-image: url('../images/gradients/light.gif');
 	background-image: linear-gradient(var(--light), lightgray);
 	background-position: top left;
 	background-repeat: repeat-x;
+	border: 4px outset var(--primary);
 	border-radius: 1em / 1em;
 	box-shadow: 0.3em 0.3em 0.3em var(--dark);
 }
 input {
+	font-size: 1.3em;
+	margin-bottom: 0.5em;
 	border-width: 0 0 1px 0;
 	border-style: solid;
 	color: inherit;
@@ -95,7 +126,14 @@ footer {
 	padding: 0.4em;
 	border-top: 5px solid var(--primary);
 }
-footer svg {
+footer a {
+	color: var(--primary);
+	transition: color 600ms;
+}
+footer a:hover {
+	color: var(--link-color);
+}
+footer svg, footer img {
 	height: 1em;
 	width: auto;
 	fill: currentColor;
@@ -107,18 +145,31 @@ footer a svg{
 	transition: all 600ms;
 }
 footer a:hover > svg {
-	transform: translateX(0.5em)scale(1.2);
-	fill: var(--link-color);
+	transform: translateX(0.5em)scale(1.2)skew(-15deg);
+}
+address {
+	font-size: 80%;
+	padding: 2em 2em 0 2em;
+	-moz-columns: 2 300px;
+	-webkit-columns: 2 300px;
+	columns: 2 300px;
+	-moz-column-gap: 3em;
+	-webkit-column-gap: 3em;
+	column-gap: 3em;
+	-moz-column-rule: 0.2em solid var(--primary);
+	-webkit-column-rule: 0.2em solid var(--primary);
+	column-rule: 0.2em solid var(--primary);
 }
 @supports (display:flex) {
 	main {
 		display: flex;
-		flex-direction: column;
+		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
 	}
-	form{
-		flex: 1 1 80%;
+	form {
+		width: auto;
+		flex: 0 1 auto;
 		margin: 0;
 	}
 }
@@ -157,4 +208,17 @@ footer a:hover > svg {
 	font-style:normal;
 	font-weight:400;
 	src: url('../fonts/WebSymbols-Regular.woff')format('woff');
+}
+@keyframes foldDown {
+	from {
+		transform: rotateX(90deg);
+	}
+}
+@keyframes bgFade {
+	from {
+		background-color: currentColor;
+	}
+	to {
+		background-color: transparent;
+	}
 }
