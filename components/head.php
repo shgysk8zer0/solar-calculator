@@ -9,7 +9,6 @@
 	<meta name="robots" content="<?=$head->robots?>"/>
 	<meta name="author" content="<?=$head->author?>"/>
 	<meta name="viewport" content="<?=$head->viewport?>"/>
-	<base href="<?=URL?>/"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 	<link rel="icon" type="image/svg" sizes="any" href="favicon.svgz?t=<?=time()?>"/>
 <link rel="alternate icon" type="image/png" sizes="16x16" href="favicon.png"/>
