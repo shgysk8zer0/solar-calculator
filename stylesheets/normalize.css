@@ -71,7 +71,7 @@ body{
 	-webkit-animation-fill-mode:forwards;
 	animation-fill-mode:forwards;
 }
-article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary, picture{
+article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,summary,picture{
 	display:block;
 }
 audio,canvas,video{
@@ -148,7 +148,7 @@ sup{
 sub{
 	bottom:-0.25em;
 }
-dl,menu,ol,ul{
+dl,ol,ul{
 	margin:1em 0;
 }
 dd{

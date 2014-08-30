@@ -10,6 +10,7 @@
 	<label for="in">How much was your last electric bill?</label>
 	$<input type="number" id="paidRate" min="0" max="9999.99" step="0.01" size="7" maxlength="7" name="paidRate" pattern="\d(\.\d{1,2})?" placeholder="117.42" autofocus/><br />
 	Wouldn't you rather pay this? $<output for="paidRate" name="calculated" id="calculated">0.00</output><sup><b>*</b></sup> <br />
+	<a href="#">If so, click here.</a><br />
 	<small>
 		<b>*</b>
 		<em>Rates are estimated.<br /> As electric bills are based on a number of factors, including time of day, it is not possible to provide accurate results.</em>

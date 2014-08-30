@@ -16,7 +16,7 @@
 		protected $pattern, $replacement, $limit = -1, $find;
 		public $in, $result;
 
-		public function __construct($str = false) {
+		public function __construct($str = null) {
 			/**
 			 * Gets database connection info from /connect.ini (stored in $site)
 			 * Uses that data to create a new PHP Data Object
@@ -28,7 +28,7 @@
 
 			$this->pattern = array();
 			$this->replacement = array();
-			if($str) $this->in = $str;
+			if(is_string($str)) $this->in = $str;
 		}
 
 		public function __isset($name) {
@@ -41,7 +41,7 @@
 			return isset($this->$name);
 		}
 
-		public function set_pattern($type) {
+		public function set_pattern($type = null) {
 			/**
 			 * Set pattern according to presets
 			 *
@@ -55,7 +55,7 @@
 			return $this;
 		}
 
-		public function replace($str) {
+		public function replace($str = null) {
 			/**
 			 * Adds a new pattern to $pattern[]
 			 *
@@ -67,7 +67,7 @@
 			return $this;
 		}
 
-		public function with($str) {
+		public function with($str = null) {
 			/**
 			 * Adds a new replacement to $replacement
 			 *
@@ -75,11 +75,11 @@
 			 * @return self
 			 */
 
-			array_push($this->replacement, $str);
+			array_push($this->replacement, (string)$str);
 			return $this;
 		}
 
-		public function ends_with($str) {
+		public function ends_with($str = null) {
 			/**
 			 * RegExp at end of string
 			 *
@@ -99,11 +99,11 @@
 			 * @return boolean
 			 */
 
-			$this->find = $this->regexp($str, 'begin');
+			$this->find = $this->regexp((string)$str, 'begin');
 			return $this->test();
 		}
 
-		public function is($str) {
+		public function is($str = null) {
 			/**
 			 * RegExp of the full string. Begin and end
 			 *
@@ -115,7 +115,7 @@
 			return $this->test();
 		}
 
-		public function has($str) {
+		public function has($str = null) {
 			/**
 			 * Location agnostic RegExp
 			 *
@@ -127,7 +127,7 @@
 			return $this->test();
 		}
 
-		public function regexp($str, $loc = null) {
+		public function regexp($str = null, $loc = null) {
 			/**
 			 * Creates the RegExp format '/[^]pattern[$]/', replacing dangerous characters
 			 *
@@ -135,7 +135,7 @@
 			 * @return string (regular expression)
 			 */
 
-			$pattern = preg_quote($str, '/');
+			$pattern = preg_quote((string)$str, '/');
 			switch($loc) {
 				case 'begin':
 				case '^':
@@ -166,7 +166,7 @@
 			return preg_match($this->find, $this->in);
 		}
 
-		public function find($str, $loc = null) {
+		public function find($str = null, $loc = null) {
 			/**
 			 * In the case of finding a needle in a haystack, this sis the needle
 			 *
@@ -185,11 +185,11 @@
 			 * @return self
 			 */
 
-			$this->in = $str;
+			$this->in = (string)$str;
 			return $this;
 		}
 
-		public function limit($n) {
+		public function limit($n = 0) {
 			/**
 			 * Optional limit to replacements. Defaults to unlimited
 			 *
@@ -197,7 +197,7 @@
 			 * @return self
 			 */
 
-			$this->limit = $n;
+			$this->limit = (int)$n;
 			return $this;
 		}
 

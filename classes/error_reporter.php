@@ -1,16 +1,17 @@
 <?php
+	/**
+	 * Custom error handling.
+	 * Catch errors using custom function using set_error_handler($callback_function, ERROR_LEVEL)
+	 *
+	 * @link http://us3.php.net/set_error_handler
+	 * @author Chris Zuber <shgysk8zer0@gmail.com>
+	 * @copyright 2014, Chris Zuber
+	 * @license http://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
+	 * @package core_shared
+	 * @version 2014-06-05
+	 */
+
 	class error_reporter extends _pdo {
-		/**
-		 * Custom error handling.
-		 * Catch errors using custom function using set_error_handler($callback_function, ERROR_LEVEL)
-		 *
-		 * @link http://us3.php.net/set_error_handler
-		 * @author Chris Zuber <shgysk8zer0@gmail.com>
-		 * @copyright 2014, Chris Zuber
-		 * @license http://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
-		 * @package core_shared
-		 * @version 2014-06-05
-		 */
 
 		protected static $instance = null;
 
@@ -18,9 +19,15 @@
 
 		public $method, $log = 'errors.log';
 
-		public static function load($method) {
+		public static function load($method = 'default') {
+			/**
+			 * Static load method should always be used,
+			 * especially when in development and multiple
+			 * errors may be reported.
+			 */
+
 			if(is_null(self::$instance)) {
-				self::$instance = new self($method);
+				self::$instance = new self((string)$method);
 			}
 			return self::$instance;
 		}
@@ -41,7 +48,7 @@
 			 * @ return mixed (return false to make PHP handle the error in the default way)
 			 */
 
-			$this->method = strtolower($method);
+			$this->method = strtolower((string)$method);
 
 			/**
 			 * Get defined constants using get_defined_constants(true)
@@ -108,7 +115,7 @@
 			}
 		}
 
-		public function report($error_level, $error_message, $file, $line, $scope) {
+		public function report($error_level = null, $error_message = null, $file = null, $line = null, $scope = null) {
 			/**
 			 * Public method to report errors. Just calls the private private
 			 * method according to a switch on $this->method
@@ -125,11 +132,11 @@
 
 			switch($this->method) {
 				case 'database': {
-					return $this->database($error_level, $error_message, $file, $line, $scope);
+					return $this->database((int)$error_level, (string)$error_message, (string)$file, (int)$line, $scope);
 				} break;
 
 				case 'log': {
-					return $this->logger($error_level, $error_message, $file, $line, $scope);
+					return $this->logger((int)$error_level, (string)$error_message, (string)$file, (int)$line, $scope);
 				} break;
 
 				default: {

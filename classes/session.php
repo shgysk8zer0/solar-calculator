@@ -9,16 +9,15 @@
 	* @license http://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
 	* @package core_shared
 	* @version 2014-04-19
+	* @var string $name
+	* @var int? $expires
+	* @var string $path
+	* @var string $domain
+	* @var boolean $secure
+	* @var boolean $httponly
+	* @var session $instance
 	*/
 	class session {
-		/**
-		 * @author Chris Zuber <shgysk8zer0@gmail.com>
-		 * @copyright 2014, Chris Zuber
-		 * @license http://opensource.org/licenses/GPL-3.0 GNU General Public License, version 3 (GPL-3.0)
-		 * @package core_shared
-		 * @version 2014-04-19
-		 */
-
 		private $name, $expires, $path, $domain, $secure, $httponly;
 		private static $instance = null;
 
@@ -49,19 +48,19 @@
 
 			if(session_status() !== PHP_SESSION_ACTIVE) {							#Do not create new session of one has already been created
 				$this->expires = 0;
-				$this->path = preg_replace('/^' . preg_quote("{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['SERVER_NAME']}", '/') . '/', '', URL);
-				$this->domain =$_SERVER['HTTP_HOST'];
+				$this->path = '/' . trim(str_replace("{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['SERVER_NAME']}", '/', URL), '/');
+				$this->domain = $_SERVER['HTTP_HOST'];
 				$this->secure = https();
 				$this->httponly = true;
-				if(isset($name)) {
-					$name = trim(strtolower($name));
-					session_name($name);
-					$this->name = $name;
+
+				if(is_null($name)) {
+					$name = end(explode('/', trim(BASE, '/')));
 				}
-				else {										#If session has already started, get the name of it
-					$this->name = session_name();
+				$this->name = preg_replace('/[^\w]/', null, strtolower($name));
+				session_name($this->name);
+				if(!array_key_exists($this->name, $_COOKIE)) {
+					session_set_cookie_params($this->expires, $this->path, $this->domain, $this->secure, $this->httponly);
 				}
-				session_set_cookie_params($this->expires, $this->path, $this->domain, $this->secure, $this->httponly);
 				session_start();
 			}
 		}
@@ -75,7 +74,7 @@
 			 * @example "$session->key" Returns $value
 			 */
 
-			$key = strtolower(preg_replace('/_/', '-', $key));
+			$key = strtolower(str_replace('_', '-', $key));
 			if(array_key_exists($key, $_SESSION)) {
 				return $_SESSION[$key];
 			}
@@ -90,7 +89,7 @@
 			 * @return void
 			 * @example "$session->key = $value"
 			 */
-			$key = strtolower(preg_replace('/_/', '-', $key));
+			$key = strtolower(str_replace('_', '-', $key));
 			$_SESSION[$key] = trim($value);
 		}
 
@@ -103,7 +102,7 @@
 
 			$name = strtolower($name);
 			$act = substr($name, 0, 3);
-			$key = preg_replace('/_/', '-', substr($name, 3));
+			$key = str_replace('_', '-', substr($name, 3));
 			switch($act) {
 				case 'get':
 					if(array_key_exists($key, $_SESSION)) {
@@ -129,7 +128,7 @@
 			 * @example "isset({$session->key})"
 			 */
 
-			$key = strtolower(preg_replace('/_/', '-', $key));
+			$key = strtolower(str_replace('_', '-', $key));
 			return array_key_exists($key, $_SESSION);
 		}
 
@@ -142,7 +141,7 @@
 			 * @example "unset($session->key)"
 			 */
 
-			$key = strtolower(preg_replace('/_/', '-', $key));
+			$key = strtolower(str_replace('_', '-', $key));
 			unset($_SESSION[$key]);
 		}
 

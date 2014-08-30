@@ -2,6 +2,7 @@
 	class login extends _pdo {
 		/**
 		 * Class to handle login or create new users from form submissions or $_SESSION
+		 * Can check login role as well (new, user, admin, etc)
 		 *
 		 * @author Chris Zuber <shgysk8zer0@gmail.com>
 		 * @copyright 2014, Chris Zuber
@@ -9,6 +10,8 @@
 		 * @package core_shared
 		 * @version 2014-04-19
 		 * @uses /classes/_pdo.php
+		 * @var array $useer_data
+		 * @var login $instance
 		 */
 
 		public $user_data = array();
@@ -50,7 +53,7 @@
 			);
 		}
 
-		public function create_from($source) {
+		public function create_from(array $source) {
 			/**
 			 * Creates new user using an array passed as source. Usually $_POST or $_SESSION
 			 *
@@ -71,7 +74,7 @@
 					)
 				")->bind([
 					'user' => trim($source['user']),
-					'password' => password_hash(trim($source['password']), PASSWORD_BCRYPT, [
+					'password' => password_hash(trim((string)$source['password']), PASSWORD_BCRYPT, [
 						'cost' => 11,
 						'salt' => mcrypt_create_iv(50, MCRYPT_DEV_URANDOM)
 					])
@@ -82,7 +85,7 @@
 			}
 		}
 
-		public function login_with($source) {
+		public function login_with(array $source) {
 			/**
 			 * Intended to find login info from $_COOKIE, $_SESSION, or $_POST
 			 *
@@ -116,12 +119,13 @@
 			/**
 			 * Setter method for the class.
 			 *
-			 * @param string $key, mixed $value
+			 * @param string $key
+			 * @param mixed $value
 			 * @return void
 			 * @example "$login->key = $value"
 			 */
 
-			$key = preg_replace('/_/', '-', strtolower($key));
+			$key = str_replace('_', '-', strtolower($key));
 			$this->user_data[$key] = $value;
 			return $this;
 		}
@@ -135,7 +139,7 @@
 			 * @example "$login->key" Returns $value
 			 */
 
-			$key = preg_replace('/_/', '-', strtolower($key));
+			$key = str_replace('_', '-', strtolower($key));
 			if(array_key_exists($key, $this->user_data)) {
 				return $this->user_data[$key];
 			}
@@ -149,7 +153,7 @@
 			 * @example "isset({$login->key})"
 			 */
 
-			$key = preg_replace('/_/', '-', strtolower($key));
+			$key = str_replace('_', '-', strtolower($key));
 			return array_key_exists($key, $this->user_data);
 		}
 
@@ -162,11 +166,11 @@
 			 * @example "unset($login->key)"
 			 */
 
-			$key = preg_replace('/_/', '-', strtolower($key));
+			$key = str_replace('_', '-', strtolower($key));
 			unset($this->user_data[$key]);
 		}
 
-		public function __call($name, $arguments) {
+		public function __call($name, array $arguments) {
 			/**
 			 * Chained magic getter and setter
 			 * @param string $name, array $arguments
@@ -175,7 +179,7 @@
 
 			$name = strtolower($name);
 			$act = substr($name, 0, 3);
-			$key = preg_replace('/_/', '-', substr($name, 3));
+			$key = str_replace('_', '-', substr($name, 3));
 			switch($act) {
 				case 'get':
 					if(array_key_exists($key, $this->user_data)) {
