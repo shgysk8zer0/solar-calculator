@@ -1,6 +1,7 @@
 <?php
 	require('./functions.php');
 	config();
+	CSP();
 	define_ua();
 ?>
 <!doctype html>
