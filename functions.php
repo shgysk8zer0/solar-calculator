@@ -358,11 +358,13 @@
 		if(!$CSP_Policy) return;
 		$enforce = array_remove('enforce', $CSP_Policy);
 		if(is_null($enforce)) $enforce = true;
+
 		foreach($CSP_Policy as $type => $src) {		// Convert config array to string for CSP header
 			$CSP .= "{$type} {$src};";
 		}
-		$reg = new regexp($CSP);					// Prepare to use regexp to set CSP nonce with the one in $_SESSION
-		$CSP = $reg->replace('%NONCE%')->with("{$_SESSION['nonce']}")->execute();
+
+		$CSP = str_replace('%NONCE%', $_SESSION['nonce'], $CSP);
+
 		if($enforce) {								// If in debug mode, CSP should be "report-only"
 													// Set headers for all prefixed versions
 													//[TODO] Use UA sniffing to only set correct header
