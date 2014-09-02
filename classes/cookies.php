@@ -17,7 +17,7 @@
 	 * $cookie->existing_cookie //Returns value of $_COOKIES['existing-cookie']
 	 */
 
-	class cookies {
+	class cookies implements magic_methods {
 		public $expires, $path, $domain, $secure, $httponly;
 		private static $instance = null;
 
@@ -114,18 +114,6 @@
 			return array_key_exists(str_replace('_', '-', $name), $_COOKIE);
 		}
 
-		public function keys() {
-			/**
-			 * Lists all cookies by name
-			 *
-			 * @param void
-			 * @return array
-			 * @example $cookies->keys() (['test', ...])
-			 */
-
-			return array_keys($_COOKIE);
-		}
-
 		public function __unset($name) {
 			/**
 			 * Completely desttroys a cookie on server and client
@@ -143,5 +131,18 @@
 			}
 			return false;
 		}
+
+		public function keys() {
+			/**
+			 * Lists all cookies by name
+			 *
+			 * @param void
+			 * @return array
+			 * @example $cookies->keys() (['test', ...])
+			 */
+
+			return array_keys($_COOKIE);
+		}
+
 	}
 ?>

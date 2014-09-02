@@ -1,5 +1,5 @@
 <?php
-	class ini {
+	class ini implements magic_methods {
 		/**
 		 * Reads an ini file and stores as an object
 		 *

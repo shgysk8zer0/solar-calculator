@@ -14,7 +14,7 @@
 		 * @var login $instance
 		 */
 
-		public $user_data = array();
+		public $data = [];
 		protected static $instance = null;
 
 		public static function load($ini = 'connect') {
@@ -45,7 +45,7 @@
 			parent::__construct($ini);					#login extends _pdo, so create new instance of parent.
 			#[TODO] Use static parent::load() instead, but this causes errors
 
-			$this->user_data = array(
+			$this->data = array(
 				'user' => null,
 				'password' => null,
 				'role' => null,
@@ -112,90 +112,7 @@
 					$this->setUser($results->user)->setPassword($results->password)->setRole($results->role)->setLogged_In(true);
 				}
 			}
-			return ($this->user_data['logged-in']);
-		}
-
-		public function __set($key, $value) {
-			/**
-			 * Setter method for the class.
-			 *
-			 * @param string $key
-			 * @param mixed $value
-			 * @return void
-			 * @example "$login->key = $value"
-			 */
-
-			$key = str_replace('_', '-', strtolower($key));
-			$this->user_data[$key] = $value;
-			return $this;
-		}
-
-		public function __get($key) {
-			/**
-			 * The getter method for the class.
-			 *
-			 * @param string $key
-			 * @return mixed
-			 * @example "$login->key" Returns $value
-			 */
-
-			$key = str_replace('_', '-', strtolower($key));
-			if(array_key_exists($key, $this->user_data)) {
-				return $this->user_data[$key];
-			}
-			return false;
-		}
-
-		public function __isset($key) {
-			/**
-			 * @param string $key
-			 * @return boolean
-			 * @example "isset({$login->key})"
-			 */
-
-			$key = str_replace('_', '-', strtolower($key));
-			return array_key_exists($key, $this->user_data);
-		}
-
-		public function __unset($key) {
-			/**
-			 * Removes an index from the array.
-			 *
-			 * @param string $key
-			 * @return void
-			 * @example "unset($login->key)"
-			 */
-
-			$key = str_replace('_', '-', strtolower($key));
-			unset($this->user_data[$key]);
-		}
-
-		public function __call($name, array $arguments) {
-			/**
-			 * Chained magic getter and setter
-			 * @param string $name, array $arguments
-			 * @example "$login->[getName|setName]($value)"
-			 */
-
-			$name = strtolower($name);
-			$act = substr($name, 0, 3);
-			$key = str_replace('_', '-', substr($name, 3));
-			switch($act) {
-				case 'get':
-					if(array_key_exists($key, $this->user_data)) {
-						return $this->user_data[$key];
-					}
-					else{
-						die('Unknown variable.');
-					}
-					break;
-				case 'set':
-					$this->user_data[$key] = $arguments[0];
-					return $this;
-					break;
-				default:
-					die('Unknown method.');
-			}
+			return ($this->data['logged-in']);
 		}
 
 		public function logout() {

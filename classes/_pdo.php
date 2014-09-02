@@ -12,139 +12,46 @@
 	*/
 
 	class _pdo extends pdo_resources {
-		protected $pdo, $prepared, $connect, $data = [];
+		protected $pdo, $prepared, $connect;
 		private $query;
 		protected static $instances = [];
 
-		public static function load($ini = 'connect') {
+		public static function load($con = 'connect') {
 			/**
 			 * @method load
 			 * @desc
 			 * Static load function avoids creating multiple instances/connections
 			 * It stores an array of instances in the static instances array.
-			 * It uses $ini as the key to the array, and the _pdo instance as
+			 * It uses $con as the key to the array, and the _pdo instance as
 			 * the value.
 			 *
-			 * @param string $ini (.ini file to use for database credentials)
+			 * @param string $con (.ini file to use for database credentials)
 			 * @return pdo_object/class
 			 * @example $pdo = _pdo::load or $pdo = _pdo::load('connect')
 			 */
 
-			if(!array_key_exists($ini, self::$instances)) {
-				self::$instances[$ini] = new self($ini);
+			if(!array_key_exists($con, self::$instances)) {
+				self::$instances[$con] = new self($con);
 			}
-			return self::$instances[$ini];
+			return self::$instances[$con];
 		}
 
-		public function __construct($ini = 'connect') {
+		public function __construct($con = 'connect') {
 			/**
 			 * @method __construct
 			 * @desc
 			 * Gets database connection info from /connect.ini (using ini::load)
 			 * The default ini file to use is connect, but can be passed another
-			 * in the $ini argument.
+			 * in the $con argument.
 			 *
 			 * Uses that data to create a new PHP Data Object
 			 *
-			 * @param string $ini (.ini file to use for database credentials)
+			 * @param string $con (.ini file to use for database credentials)
 			 * @return void
 			 * @example $pdo = new _pdo()
 			 */
 
-			parent::__construct($ini);
-		}
-
-		public function __set($key, $value) {
-			/**
-			 * @method __set
-			 * Setter method for the class.
-			 *
-			 * @param string $key
-			 * @param mixed $value
-			 * @return void
-			 * @example "$pdo->key = $value"
-			 */
-
-			$key = str_replace(' ', '-', (string)$key);
-			$this->data[$key] = $value;
-		}
-
-		public function __get($key) {
-			/**
-			 * The getter method for the class.
-			 *
-			 * @param string $key
-			 * @return mixed
-			 * @example "$pdo->key" Returns $value
-			 */
-
-			$key = str_replace(' ', '-', (string)$key);
-			if(array_key_exists($key, $this->data)) {
-				return $this->data[$key];
-			}
-			return false;
-		}
-
-		public function __isset($key) {
-			/**
-			 * @param string $key
-			 * @return boolean
-			 * @example "isset({$pdo->key})"
-			 */
-
-			return array_key_exists(str_replace(' ', '-', $key), $this->data);
-		}
-
-		public function __unset($key) {
-			/**
-			 * Removes an index from the array.
-			 *
-			 * @param string $key
-			 * @return void
-			 * @example "unset($pdo->key)"
-			 */
-
-			unset($this->data[str_replace(' ', '-', $key)]);
-		}
-
-		public function __call($name, array $arguments) {
-			/**
-			 * Chained magic getter and setter
-			 * @param string $name, array $arguments
-			 * @example "$pdo->[getName|setName]($value)"
-			 */
-
-			$name = strtolower((string)$name);
-			$act = substr($name, 0, 3);
-			$key = str_replace(' ', '-', substr($name, 3));
-			switch($act) {
-				case 'get': {
-					if(array_key_exists($key, $this->data)) {
-						return $this->data[$key];
-					}
-					else{
-						return false;
-					}
-				} break;
-				case 'set': {
-					$this->data[$key] = $arguments[0];
-					return $this;
-				} break;
-				default: {
-					throw new Exception("Unknown method: {$name} in " . __CLASS__ .'->' . __METHOD__);
-				}
-			}
-		}
-
-		public function keys() {
-			/**
-			 * Show all keys for entries in $this->data array
-			 *
-			 * @param void
-			 * @return array
-			 */
-
-			return array_keys($this->data);
+			parent::__construct($con);
 		}
 
 		public function prepare($query) {
@@ -227,25 +134,6 @@
 			unset($this);
 		}
 
-		public function prepare_keys(array $arr) {
-			/**
-			 * Converts array_keys to something safe for
-			 * queries
-			 *
-			 * @param array $arr
-			 * @return array
-			 */
-
-			$keys = array_keys($arr);
-			$key_walker = function(&$key) {
-				$this->escape($key);
-				$key = "`{$key}`";
-			};
-			array_walk($keys, $key_walker);
-			$arr = array_combine($keys, array_values($arr));
-			return $arr;
-		}
-
 		public function prepare_key_value(array &$arr) {
 			/**
 			 * While this works with multi-dimensional
@@ -257,6 +145,7 @@
 			 * so $arr = $pdo->prepare_key_value($arr) is the same as
 			 * $$pdo->prepare_key_value($arr)
 			 *
+			 * @depreciated
 			 * @param array $arr
 			 * @return array
 			 * @usage $arr = [
@@ -303,6 +192,7 @@
 			 * $binds->values is array_values($arr) {original values
 			 * without the keys}
 			 *
+			 * @depreciated
 			 * @param array $arr
 			 * @param string $prefix
 			 * @param string $suffix

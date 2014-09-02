@@ -1,5 +1,5 @@
 <?php
-	class template {
+	class template implements magic_methods {
 		/**
 		 * Opens a template file, ready to be easily modified.
 		 * File contents are loaded and optionaly inified
@@ -144,7 +144,7 @@
 			return $this;
 		}
 
-		public function __set($replace = null, $with = null) {
+		public function __set($replace, $with) {
 			/**
 			 * Unlike most magic setters, this does not work with variables
 			 * Instead, it sets up a Regular Expression string replacement.
@@ -180,6 +180,12 @@
 			else {
 				return '';
 			}
+		}
+		public function __isset($key) {
+			return array_key_exists($key, $this->replace);
+		}
+		public function __unset($key) {
+			unset($this->replace[$key]);
 		}
 
 		public function __call($replace, array $arguments) {

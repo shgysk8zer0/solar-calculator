@@ -18,36 +18,36 @@
 		private static $instances = [];
 		public $connected;
 
-		public function load($ini = 'connect') {
-			if(!array_key_exists($ini, self::$instances)) {
-				self::$instances[$ini] = new self($ini);
+		public function load($con = 'connect') {
+			if(!array_key_exists($con, self::$instances)) {
+				self::$instances[$con] = new self($con);
 			}
-			return self::$instances[$ini];
+			return self::$instances[$con];
 		}
 
-		public function __construct($ini = 'connect') {
+		public function __construct($con = 'connect') {
 			/**
 			 * @method __construct
 			 * @desc
-			 * Gets database connection info from /connect.ini (using ini::load)
+			 * Gets database connection info from /connect.ini (using parse_ini_file)
 			 * The default ini file to use is connect, but can be passed another
-			 * in the $ini argument.
+			 * in the $con argument.
 			 *
 			 * Uses that data to create a new PHP Data Object
 			 *
-			 * @param string $ini (.ini file to use for database credentials)
+			 * @param string $con (.ini file to use for database credentials)
 			 * @return void
-			 * @example parent::__construct($ini)
+			 * @example parent::__construct($con)
 			 */
 
 
 			$this->connected = false;
 
-			if(is_string($ini)) {
-				$this->connect = ini::load($ini);
+			if(is_string($con)) {
+				$this->connect = (object)parse_ini_file("{$con}.ini");
 			}
-			elseif(is_object($ini)) {
-				$this->connect = $ini;
+			elseif(is_object($con)) {
+				$this->connect = $con;
 			}
 
 			try{

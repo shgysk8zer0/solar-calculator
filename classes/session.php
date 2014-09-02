@@ -17,7 +17,7 @@
 	* @var boolean $httponly
 	* @var session $instance
 	*/
-	class session {
+	class session implements magic_methods {
 		private $name, $expires, $path, $domain, $secure, $httponly;
 		private static $instance = null;
 
@@ -93,7 +93,7 @@
 			$_SESSION[$key] = trim($value);
 		}
 
-		public function __call($name, $arguments) {
+		public function __call($name, array $arguments) {
 			/**
 			 * Chained magic getter and setter
 			 * @param string $name, array $arguments

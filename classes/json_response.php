@@ -15,7 +15,7 @@
 	 * $resp->notify(...)->html(...)->append(...)->prepend(...)->before(...)->after(...)->attributes(...)->remove(...)->send();
 	 */
 
-	class json_response {
+	class json_response implements magic_methods {
 		protected $response = [];
 		private static $instance = null;
 

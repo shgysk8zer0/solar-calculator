@@ -206,6 +206,21 @@
 		return ob_get_clean();
 	}
 
+	function parse_json_file($filename = null, $assoc = false, $depth = 512, $options = 0) {
+		/**
+		 * Reads a file and returns a json_decoded object
+		 *
+		 * @link http://php.net/manual/en/function.json-decode.php
+		 * @param string $filename
+		 * @param bool $assoc
+		 * @param int $depth
+		 * @param int $options
+		 * @return stdClass Object
+		 */
+
+		return json_decode(file_get_contents("{$filename}.json", true), $assoc, $depth, $options);
+	}
+
 	function strip_enclosing_tag($html = null) {
 		/**
 		 * strips leading trailing and closing tags, including leading
@@ -358,13 +373,10 @@
 		if(!$CSP_Policy) return;
 		$enforce = array_remove('enforce', $CSP_Policy);
 		if(is_null($enforce)) $enforce = true;
-
 		foreach($CSP_Policy as $type => $src) {		// Convert config array to string for CSP header
 			$CSP .= "{$type} {$src};";
 		}
-
 		$CSP = str_replace('%NONCE%', $_SESSION['nonce'], $CSP);
-
 		if($enforce) {								// If in debug mode, CSP should be "report-only"
 													// Set headers for all prefixed versions
 													//[TODO] Use UA sniffing to only set correct header
