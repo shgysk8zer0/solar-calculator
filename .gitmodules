@@ -1,0 +1,3 @@
+[submodule "classes/core"]
+	path = classes/core
+	url = git@github.com:shgysk8zer0/core.git
