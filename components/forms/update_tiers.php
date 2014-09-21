@@ -17,7 +17,10 @@
 		</tfoot>
 		<tbody>
 		<?php foreach($DB->fetch_array("
-			SELECT `tier`, `rate`, `kw`
+			SELECT
+				`tier`,
+				`rate`,
+				`kw`
 			FROM `tiers`
 			ORDER BY `tier`
 		") as $tier):?>

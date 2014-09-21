@@ -11,7 +11,7 @@
 	<meta name="viewport" content="<?=$head->viewport?>"/>
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico"/>
 	<link rel="icon" type="image/svg" sizes="any" href="favicon.svgz?t=<?=time()?>"/>
-<link rel="alternate icon" type="image/png" sizes="16x16" href="favicon.png"/>
+	<link rel="alternate icon" type="image/png" sizes="16x16" href="favicon.png"/>
 	<?php if(localhost() and BROWSER === 'Firefox'):?>
 	<link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="all"/>
 	<link rel="stylesheet" type="text/css" href="stylesheets/style.css" media="all"/>

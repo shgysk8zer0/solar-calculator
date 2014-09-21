@@ -1,5 +1,5 @@
 <?php
-	require('./functions.php');
+	require_once __DIR__ . DIRECTORY_SEPARATOR . 'functions.php';
 	config();
 	CSP();
 	define_ua();
